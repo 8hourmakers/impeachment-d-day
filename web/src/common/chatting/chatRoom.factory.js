@@ -43,6 +43,12 @@ class ChatRoom {
     }
 
     addChat(chat) {
+        if (this.chats.length > 1000) {
+            remove(this.chats, (val, index) => {
+                return index <= 800;
+            });
+        }
+
         this.chats.push(chat);
     }
 }
