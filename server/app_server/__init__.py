@@ -45,30 +45,34 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
 
     impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
     impeachment_redis.set('member_num', 0)
+    impeachment_redis.set('visit_cnt', 0)
 
     @socketio.on('disconnect')
     def test_disconnect():
         impeachment_redis.decr('member_num')
         member_num = impeachment_redis.get('member_num').decode('utf-8')
+        visit_cnt = impeachment_redis.get('visit_cnt').decode('utf-8')
         member_num_payload = {
             'results': {
-                'member_num': member_num
+                'member_num': int(member_num),
+                'visit_cnt': int(visit_cnt)
             }
         }
         emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='/chat')
 
     @socketio.on('connect')
     def test_connect():
-        socketio.emit('connect', 'hi')
         emit('my_response', {'data': 'Connected', 'count': 0})
         impeachment_redis.incr('member_num')
+        impeachment_redis.incr('visit_cnt')
 
         member_num = impeachment_redis.get('member_num').decode('utf-8')
+        visit_cnt = impeachment_redis.get('visit_cnt').decode('utf-8')
         join_room('auth-' + str(member_num))
-        print(rooms())
         member_num_payload = {
             'results': {
-                'member_num': member_num
+                'member_num': int(member_num),
+                'visit_cnt': int(visit_cnt)
             }
         }
         emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='/chat')
