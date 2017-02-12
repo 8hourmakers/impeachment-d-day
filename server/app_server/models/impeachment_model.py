@@ -13,6 +13,6 @@ class Impeachment(db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'impeachment_datetime': int(self.register_timestamp.strftime('%s'))
+            'impeachment_datetime': int(self.impeachment_datetime.strftime('%s'))
         }
 
