@@ -11,6 +11,7 @@ class ChateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var datas: MutableList<Comment> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+        
         return ViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.viewholder_comment, parent, false))
     }
 
@@ -20,6 +21,12 @@ class ChateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = datas.size
 
+    override fun getItemViewType(position: Int): Int =
+            when (position) {
+                0 -> 0
+                else -> 1
+            }
+
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(comment: Comment) {
@@ -28,7 +35,7 @@ class ChateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun clear(){
+    fun clear() {
         datas.clear()
         notifyDataSetChanged()
     }
