@@ -1,4 +1,4 @@
-g# Impeachment D-Day
+# Impeachment D-Day
 
 ## Requirement
 

@@ -20,7 +20,7 @@ class DDay {
             .get(api.impeachment)
             .then((res) => {
                 const data = res.data.results;
-                const time = (data.impeachment_datetime * SECOND_MS) + (HOUR_MS * 9);
+                const time = (data.impeachment_datetime * SECOND_MS) - (HOUR_MS * 9);
 
                 this.date = new Date(time);
 
@@ -37,17 +37,10 @@ class DDay {
     getDay() {
         if (!this.initiailized) return '';
 
-        const diff = this.getDiff();
+        const month = this.date.getMonth() + 1;
+        const date = this.date.getDate();
 
-        if (diff < 0) {
-            return '탄핵이 완료되었습니다.'
-        } else if (diff === 0) {
-            return 'D-Day';
-        }
-
-        const diffDate = floor(divide(diff, DATE_MS));
-
-        return `D-${diffDate}`;
+        return `${month}월 ${date}일`;
     }
 
     getFormatted() {
