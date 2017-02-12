@@ -1,0 +1,19 @@
+<div class="Chatting">
+    <div class="Chatting__content">
+        <div class="Chatting__list">
+            <chat chat-member-name="'박사모'" chat-message="'박근혜 퇴진하라'"></chat>
+        </div>
+
+        <div class="Chatting__members">
+            <span>멤버1</span>
+            <span>멤버2</span>
+            <span>멤버3</span>
+            <span>멤버4</span>
+        </div>
+    </div>
+
+    <div ng-switch="$ctrl.state" class="Chatting__footer">
+        <member-name ng-switch-when="BeforeEntry" on-submit="$ctrl.enterChatRoom(memberName)"></member-name>
+        <span ng-switch-when="Entrance">입장함</span>
+    </div>
+</div>
