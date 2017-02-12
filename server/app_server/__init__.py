@@ -8,8 +8,7 @@ __version__ = '0.1dev'
 import hashlib
 import eventlet
 from datetime import timedelta
-from flask import Flask
-from app_server.common.instances.web_socket import socketio
+from flask import Flask, request
 from app_server.common.instances.redis import impeachment_redis
 from redis import Redis
 import cgitb
@@ -42,7 +41,43 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
     app.secret_key = app.config['SECRET_KEY']
     app.permanent_session_lifetime = timedelta(minutes=app.config['SESSION_ALIVE_MINUTES'])
 
-    socketio.init_app(app)
+    from app_server.common.instances.web_socket import socketio
+    socketio.init_app(app, message_queue=app.config['SOCKETIO_REDIS_URL'])
+
+    impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
+    impeachment_redis.set('member_num', 0)
+
+    from flask_socketio import emit, join_room, Namespace, leave_room, rooms
+    from app_server.common.instances.web_socket import socketio
+    from app_server.common.instances.redis import impeachment_redis
+
+
+    @socketio.on('disconnect')
+    def socket_disconnect():
+        impeachment_redis.decr('member_num')
+        member_num = impeachment_redis.get('member_num').decode('utf-8')
+        member_num_payload = {
+            'results': {
+                'member_num': member_num
+            }
+        }
+        emit('listen/update_member_num', member_num_payload, broadcast=True)
+        print('disconnected')
+        print(member_num_payload)
+
+    @socketio.on('connect')
+    def socket_connect():
+        print(request.namespace)
+        impeachment_redis.incr('member_num')
+        member_num = impeachment_redis.get('member_num').decode('utf-8')
+        member_num_payload = {
+            'results': {
+                'member_num': member_num
+            }
+        }
+        emit('listen/update_member_num', member_num_payload, broadcast=True)
+        print('connected')
+        print(member_num_payload)
 
     # logging module
     from app_server.common.instances.db import db
@@ -56,6 +91,4 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
     from app_server.controllers.comment.rest import bp_comment
     app.register_blueprint(bp_comment)
     app.register_blueprint(bp_impeachment)
-    impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
-    impeachment_redis.set('member_num', 0)
     return app
