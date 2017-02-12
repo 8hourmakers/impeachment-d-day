@@ -1,3 +1,5 @@
+@import "../styles/openColor";
+
 .App {
     display: block;
     width: 100%;
@@ -74,6 +76,22 @@
 
         @media screen and (max-height: 600px) {
             height: 280px;
+        }
+    }
+
+    &__copyright {
+        position: fixed;
+        right: 8px;
+        bottom: 8px;
+
+        & > span {
+            display: block;
+            font-size: 12px;
+            color: @oc-white;
+        }
+
+        @media screen and (max-width: 1100px) {
+            display: none;
         }
     }
 }

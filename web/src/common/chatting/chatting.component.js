@@ -3,7 +3,11 @@ import controller from './chatting.controller';
 
 const ChattingComponent = {
     template,
-    controller
+    controller,
+    bindings: {
+        initMemberCount: '<',
+        initVisitCount: '<'
+    }
 };
 
 export default ChattingComponent;

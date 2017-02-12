@@ -10,7 +10,9 @@ class Socket {
         this.id = id++;
         this.client = null;
         this.url = `http://${host}/chat`;
-        this.options = {};
+        this.options = {
+            'force new connection': true
+        };
         this.listeners = [];
 
         this.$rootScope = injector.$rootScope;

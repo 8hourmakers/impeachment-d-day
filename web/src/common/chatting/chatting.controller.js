@@ -1,6 +1,9 @@
+import api from '../../utils/api';
+
 class ChattingCtrl {
-    constructor($scope, $timeout, ChatRoom, Socket) {
+    constructor($scope, $http, $timeout, ChatRoom, Socket) {
         this.$scope = $scope;
+        this.$http = $http;
         this.$timeout = $timeout;
         this.ChatRoom = ChatRoom;
         this.Socket = Socket;
@@ -14,9 +17,21 @@ class ChattingCtrl {
         this.isSpam = false;
         this.memberMaxCount = '-';
         this.visitCount = '-';
-        this.memberName = null;
+        this.memberName = '';
 
-        this.chatRoom.init().then(() => {
+        this.$http
+            .get(api.impeachment)
+            .then((res) => {
+                const data = res.data.results;
+
+                this.memberMaxCount = data.member_num;
+                this.visitCount = data.visit_cnt;
+            });
+
+        this.chatRoom.init().then((memberNumber, visitCount) => {
+            this.memberMaxCount = memberNumber;
+            this.visitCount = visitCount;
+
             this.$scope.$broadcast('SCROLL');
             this.$scope.$broadcast('FOCUS');
         });
@@ -62,6 +77,6 @@ class ChattingCtrl {
     }
 }
 
-ChattingCtrl.$inject = ['$scope', '$timeout', 'ChatRoom', 'Socket'];
+ChattingCtrl.$inject = ['$scope', '$http', '$timeout', 'ChatRoom', 'Socket'];
 
 export default ChattingCtrl;
