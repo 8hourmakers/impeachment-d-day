@@ -10,10 +10,9 @@ import eventlet
 from datetime import timedelta
 from flask import Flask, request
 from app_server.common.instances.redis import impeachment_redis
+from flask_socketio import emit, join_room, Namespace, leave_room, rooms
 from redis import Redis
-import cgitb
 
-cgitb.enable(format='text')
 eventlet.monkey_patch(socket=True, select=True)
 hash_mod = hashlib.sha1()
 
@@ -47,13 +46,8 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
     impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
     impeachment_redis.set('member_num', 0)
 
-    from flask_socketio import emit, join_room, Namespace, leave_room, rooms
-    from app_server.common.instances.web_socket import socketio
-    from app_server.common.instances.redis import impeachment_redis
-
-
     @socketio.on('disconnect')
-    def socket_disconnect():
+    def test_disconnect():
         impeachment_redis.decr('member_num')
         member_num = impeachment_redis.get('member_num').decode('utf-8')
         member_num_payload = {
@@ -62,22 +56,24 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
             }
         }
         emit('listen/update_member_num', member_num_payload, broadcast=True)
-        print('disconnected')
-        print(member_num_payload)
 
     @socketio.on('connect')
-    def socket_connect():
-        print(request.namespace)
+    def test_connect():
+        socketio.emit('connect', 'hi')
+        emit('my_response', {'data': 'Connected', 'count': 0})
         impeachment_redis.incr('member_num')
+
         member_num = impeachment_redis.get('member_num').decode('utf-8')
+        join_room('auth-' + str(member_num))
+        print(rooms())
         member_num_payload = {
             'results': {
                 'member_num': member_num
             }
         }
         emit('listen/update_member_num', member_num_payload, broadcast=True)
-        print('connected')
-        print(member_num_payload)
+
+    from app_server.common.instances.redis import impeachment_redis
 
     # logging module
     from app_server.common.instances.db import db
