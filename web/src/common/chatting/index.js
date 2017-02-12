@@ -1,5 +1,6 @@
 import angular from 'angular';
 import Socket from '../socket';
+import ScrollManager from '../scroll-manager';
 import ChatComponent from './chat.component';
 import MemberNameComponent from './memberName.component';
 import Sender from './sender.component';
@@ -12,7 +13,8 @@ import './sender.less';
 
 const chatting = angular
     .module('common.chatting', [
-        Socket
+        Socket,
+        ScrollManager
     ])
     .factory('ChatRoom', ChatRoomFactory)
     .component('chat', ChatComponent)

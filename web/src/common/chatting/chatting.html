@@ -1,6 +1,6 @@
 <div class="Chatting">
     <div class="Chatting__content">
-        <div class="Chatting__list">
+        <div scroll-manager class="Chatting__list">
             <chat ng-repeat="chat in $ctrl.chatRoom.chats track by chat.id"
                   chat-member-name="chat.sender_name"
                   chat-message="chat.content"></chat>

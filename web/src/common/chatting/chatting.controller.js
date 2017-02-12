@@ -12,12 +12,15 @@ class ChattingCtrl {
         this.state = 'BeforeEntry';
         this.memberName = null;
 
-        this.chatRoom.init();
+        this.chatRoom.init().then(() => {
+            this.$scope.$broadcast('SCROLL');
+        });
 
         this.socket
             .connect()
             .listen('listen/new_comment', ({ data }) => {
                 this.chatRoom.addChat(data);
+                this.$scope.$broadcast('SCROLL');
                 this.$scope.$apply();
             });
     }
