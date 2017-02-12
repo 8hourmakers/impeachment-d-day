@@ -10,8 +10,8 @@
 		android:id="@+id/imageView"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:fitsSystemWindows="true"
 		android:adjustViewBounds="false"
+		android:fitsSystemWindows="true"
 		android:scaleType="matrix"/>
 
 	<RelativeLayout
@@ -53,17 +53,17 @@
 					/>
 
 				<RelativeLayout
-					android:layout_alignParentBottom="true"
 					android:id="@+id/relativeLayout_comment"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
+					android:layout_height="wrap_content"
+					android:layout_alignParentBottom="true">
 
 					<EditText
-						android:layout_toLeftOf="@+id/button_postComment"
 						android:id="@+id/editText_comment"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_centerVertical="true"
+						android:layout_toLeftOf="@+id/button_postComment"
 						android:gravity="center_vertical"
 						android:hint="댓글을 입력하세요..."
 						android:maxLines="5"
@@ -161,11 +161,10 @@
 				android:id="@+id/textView_dday"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_below="@+id/textView_expectTitleDday"
-				android:layout_centerHorizontal="true"
-				android:layout_marginTop="48dp"
+				android:layout_centerInParent="true"
+				android:gravity="center"
 				android:textColor="#fff"
-				android:textSize="24sp"
+				android:textSize="48sp"
 				android:textStyle="bold"/>
 
 			<Button
