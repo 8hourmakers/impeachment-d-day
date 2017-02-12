@@ -55,7 +55,7 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
                 'member_num': member_num
             }
         }
-        emit('listen/update_member_num', member_num_payload, broadcast=True)
+        emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='/chat')
 
     @socketio.on('connect')
     def test_connect():
@@ -71,7 +71,7 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
                 'member_num': member_num
             }
         }
-        emit('listen/update_member_num', member_num_payload, broadcast=True)
+        emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='/chat')
 
     from app_server.common.instances.redis import impeachment_redis
 
