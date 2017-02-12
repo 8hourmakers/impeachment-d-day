@@ -44,6 +44,10 @@ class Socket {
             $rootScope.$broadcast('SOCKET_ERROR', { id, error });
         });
 
+        this.client.on('pong', () => {
+            console.log('pong');
+        });
+
         return this;
     }
 
