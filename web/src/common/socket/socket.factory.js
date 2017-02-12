@@ -9,7 +9,7 @@ class Socket {
 
         this.id = id++;
         this.client = null;
-        this.url = `http://${host}/`;
+        this.url = `http://${host}/chat`;
         this.options = {};
         this.listeners = [];
 
@@ -20,7 +20,7 @@ class Socket {
         const id = this.id;
         const $rootScope = this.$rootScope;
 
-        this.client = io(this.url, this.options);
+        this.client = io.connect(this.url, this.options);
 
         this.client.on('connect', () => {
             console.log('connected');
