@@ -1,37 +1,24 @@
-from flask_socketio import emit, join_room, Namespace
+from flask_socketio import emit, join_room, Namespace, leave_room, rooms
 from app_server.common.instances.web_socket import socketio
 from app_server.common.instances.redis import impeachment_redis
+
+
+class CommentNamespace(Namespace):
+    def on_connect(self):
+        print('ws connected')
+        emit('listen/connect', {'results': 'success'})
+
+    def on_disconnect(self):
+        print('Client disconnected')
 
 
 def new_comment(serialized_comment):
     comment_payload = {
         'results': serialized_comment
     }
-    socketio.emit('listen/new_comment', comment_payload, broadcast=True, namespace='global')
+    socketio.emit('listen/new_comment', comment_payload, broadcast=True)
+    print(comment_payload)
     return
 
 
-@socketio.on('disconnect', namespace='/global')
-def socket_disconnect():
-    impeachment_redis.decr('member_num')
-    member_num = impeachment_redis.get('member_num').decode('utf-8')
-    member_num_payload = {
-        'results': {
-            'member_num': member_num
-        }
-    }
-    socketio.emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='global')
-    print('disconnected')
-
-
-@socketio.on('connect', namespace='/global')
-def socket_connect():
-    impeachment_redis.incr('member_num')
-    member_num = impeachment_redis.get('member_num').decode('utf-8')
-    member_num_payload = {
-        'results': {
-            'member_num': member_num
-        }
-    }
-    socketio.emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='global')
-    print('connected')
+# socketio.on_namespace(CommentNamespace('/global'))
