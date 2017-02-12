@@ -6,8 +6,16 @@ class ChattingCtrl {
     $onInit() {
         this.socket = new this.Socket();
         this.state = 'BeforeEntry';
+        this.memberName = null;
 
-        this.socket.connect();
+        this.socket
+            .connect()
+            .listen('listen/update_member_num', ({ data }) => {
+                console.log(data);
+            })
+            .listen('listen/new_comment', ({ data }) => {
+                console.log(data);
+            });
     }
 
     $onDestroy() {
@@ -18,8 +26,7 @@ class ChattingCtrl {
 
     enterChatRoom(memberName) {
         this.state = 'Entrance';
-
-        console.log(memberName);
+        this.memberName = memberName;
     }
 }
 

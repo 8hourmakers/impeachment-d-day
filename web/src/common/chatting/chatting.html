@@ -14,6 +14,6 @@
 
     <div ng-switch="$ctrl.state" class="Chatting__footer">
         <member-name ng-switch-when="BeforeEntry" on-submit="$ctrl.enterChatRoom(memberName)"></member-name>
-        <span ng-switch-when="Entrance">입장함</span>
+        <sender ng-switch-when="Entrance" member-name="$ctrl.memberName"></sender>
     </div>
 </div>

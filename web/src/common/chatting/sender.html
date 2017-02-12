@@ -1,3 +1,5 @@
 <div class="ChattingSender">
-
+    <span ng-bind="$ctrl.memberName"></span>
+    <input ng-model="$ctrl.message" type="text" />
+    <button ng-click="$ctrl.sendMessage()">보내기</button>
 </div>

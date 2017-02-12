@@ -10,7 +10,6 @@ class Socket {
         this.client = null;
         this.url = 'http://localhost/';
         this.options = {
-            multiplex: true,
             'force new connection': true
         };
         this.listeners = [];
@@ -22,9 +21,10 @@ class Socket {
         const id = this.id;
         const $rootScope = this.$rootScope;
 
-        this.client = io(this.url, this.options);
+        this.client = io.connect(this.url, this.options);
 
         this.client.on('connect', () => {
+            console.log('connected');
             $rootScope.$broadcast('SOCKET_CONNECT', { id });
         });
 
@@ -51,6 +51,7 @@ class Socket {
         if (!this.client) throw new Error();
 
         this.client.on(listener, (message) => {
+            console.log('message', message);
             callback(message);
         });
 
