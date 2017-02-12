@@ -48,6 +48,8 @@ class ChattingCtrl {
     enterChatRoom(memberName) {
         this.state = 'Entrance';
         this.memberName = memberName;
+
+        this.$scope.$broadcast('FOCUS');
     }
 
     showSpam() {
@@ -55,6 +57,7 @@ class ChattingCtrl {
 
         this.$timeout(() => {
             this.isSpam = false;
+            this.$scope.$broadcast('FOCUS');
         }, 1500);
     }
 }
