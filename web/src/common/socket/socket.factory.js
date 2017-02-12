@@ -8,8 +8,9 @@ class Socket {
 
         this.id = id++;
         this.client = null;
-        this.url = 'http://localhost/';
+        this.url = 'http://localhost/global';
         this.options = {
+            multiplex: true,
             'force new connection': true
         };
         this.listeners = [];
