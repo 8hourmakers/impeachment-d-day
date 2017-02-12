@@ -3,3 +3,5 @@ server/venv
 server/.idea
 *.db
 .idea
+android/impeachmentEightDDay/gradlew
+android/impeachmentEightDDay/gradlew.bat

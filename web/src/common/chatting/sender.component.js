@@ -5,7 +5,8 @@ const SenderComponent = {
     template,
     controller,
     bindings: {
-        memberName: '<'
+        memberName: '<',
+        onSendChat: '&'
     }
 };
 

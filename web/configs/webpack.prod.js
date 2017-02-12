@@ -24,7 +24,7 @@ module.exports = {
             { test: /\.js$/, loader: 'babel', include: paths.src, query: { cacheDirectory: true } },
             { test: /\.less$/, loader: extractStylesheet.extract('style', 'css!postcss!less'), include: paths.src },
             { test: /\.css$/, loader: extractFrameworkCss.extract('style', 'css!postcss') },
-            { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/, loader: 'file' },
+            { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|otf)$/, loader: 'file' },
             { test: /\.html$/, loader: 'raw' }
         ]
     },

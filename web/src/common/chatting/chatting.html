@@ -9,6 +9,6 @@
 
     <div ng-switch="$ctrl.state" class="Chatting__footer">
         <member-name ng-switch-when="BeforeEntry" on-submit="$ctrl.enterChatRoom(memberName)"></member-name>
-        <sender ng-switch-when="Entrance" member-name="$ctrl.memberName"></sender>
+        <sender ng-switch-when="Entrance" member-name="$ctrl.memberName" on-send-chat="$ctrl.refresh()"></sender>
     </div>
 </div>

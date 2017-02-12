@@ -14,6 +14,7 @@ class ChattingCtrl {
 
         this.chatRoom.init().then(() => {
             this.$scope.$broadcast('SCROLL');
+            this.$scope.$broadcast('FOCUS');
         });
 
         this.socket
@@ -29,6 +30,13 @@ class ChattingCtrl {
         if (this.socket) {
             this.socket.disconnect();
         }
+    }
+
+    refresh() {
+        this.chatRoom.init().then(() => {
+            this.$scope.$broadcast('SCROLL');
+            this.$scope.$broadcast('FOCUS');
+        });
     }
 
     enterChatRoom(memberName) {
