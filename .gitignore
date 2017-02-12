@@ -1,0 +1,5 @@
+server/venv
+*.pyc
+server/.idea
+*.db
+.idea
