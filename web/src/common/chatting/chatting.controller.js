@@ -10,6 +10,7 @@ class ChattingCtrl {
         this.chatRoom = new this.ChatRoom();
 
         this.state = 'BeforeEntry';
+        this.memberMaxCount = '-';
         this.memberName = null;
 
         this.chatRoom.init().then(() => {
@@ -19,8 +20,13 @@ class ChattingCtrl {
 
         this.socket
             .connect()
-            .listen('listen/new_comment', ({ data }) => {
-                this.chatRoom.addChat(data);
+            .listen('listen/update_member_num', (message) => {
+                const memberNumber = message.results.member_num;
+                this.memberMaxCount = memberNumber;
+                this.$scope.$apply();
+            })
+            .listen('listen/new_comment', (message) => {
+                this.chatRoom.addChat(message.results);
                 this.$scope.$broadcast('SCROLL');
                 this.$scope.$apply();
             });
@@ -30,13 +36,6 @@ class ChattingCtrl {
         if (this.socket) {
             this.socket.disconnect();
         }
-    }
-
-    refresh() {
-        this.chatRoom.init().then(() => {
-            this.$scope.$broadcast('SCROLL');
-            this.$scope.$broadcast('FOCUS');
-        });
     }
 
     enterChatRoom(memberName) {

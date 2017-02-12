@@ -1,4 +1,6 @@
 <div class="Chatting">
+    <span class="Chatting__number">총 인원: {{ $ctrl.memberMaxCount }}</span>
+
     <div class="Chatting__content">
         <div scroll-manager class="Chatting__list">
             <chat ng-repeat="chat in $ctrl.chatRoom.chats track by chat.id"
@@ -9,6 +11,6 @@
 
     <div ng-switch="$ctrl.state" class="Chatting__footer">
         <member-name ng-switch-when="BeforeEntry" on-submit="$ctrl.enterChatRoom(memberName)"></member-name>
-        <sender ng-switch-when="Entrance" member-name="$ctrl.memberName" on-send-chat="$ctrl.refresh()"></sender>
+        <sender ng-switch-when="Entrance" member-name="$ctrl.memberName"></sender>
     </div>
 </div>

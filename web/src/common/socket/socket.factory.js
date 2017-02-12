@@ -23,9 +23,7 @@ class Socket {
         this.client = io.connect(this.url, this.options);
 
         this.client.on('connect', () => {
-            console.log('connected');
             $rootScope.$broadcast('SOCKET_CONNECT', { id });
-            this.client.emit('ping', { id });
         });
 
         this.client.on('disconnect', () => {
@@ -42,10 +40,6 @@ class Socket {
 
         this.client.on('reconnect_error', (error) => {
             $rootScope.$broadcast('SOCKET_ERROR', { id, error });
-        });
-
-        this.client.on('pong', () => {
-            console.log('pong');
         });
 
         return this;

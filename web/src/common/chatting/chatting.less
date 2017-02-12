@@ -1,6 +1,7 @@
 @import "../../styles/openColor";
 
 .Chatting {
+    position: relative;
     display: block;
     margin: 0 auto;
     max-width: 768px;
@@ -9,6 +10,12 @@
     background-color: @oc-gray-0;
     border: 1px solid @oc-gray-3;
     border-radius: 7px;
+
+    &__number {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+    }
 
     &__content {
         display: flex;
