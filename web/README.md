@@ -1,4 +1,4 @@
-# Impeachment D-Day
+g# Impeachment D-Day
 
 ## Requirement
 
@@ -9,7 +9,7 @@
 ## Install
 
 ```shell
-$ npm install
+$ scripts/init.sh
 ```
 
 
