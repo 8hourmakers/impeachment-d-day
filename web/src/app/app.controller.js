@@ -1,16 +1,15 @@
-const api = require('../utils/api');
+import api from '../utils/api';
 
 class AppCtrl {
-    constructor($http) {
-        this.$http = $http;
+    constructor(dDay) {
+        this.dDay = dDay;
     }
 
     $onInit() {
-        this.dDay = null;
-        this.initiailized = false;
+        this.dDay.initialize();
     }
 }
 
-AppCtrl.$inject = ['$http'];
+AppCtrl.$inject = ['dDay'];
 
 export default AppCtrl;
