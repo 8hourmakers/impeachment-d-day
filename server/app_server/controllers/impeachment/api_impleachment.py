@@ -13,7 +13,7 @@ import codecs
 from sqlalchemy import or_
 from app_server.common.instances.db import db
 from app_server.common.utils.time_util import str_to_datetime
-
+from app_server.common.instances.redis import impeachment_redis
 
 class ImpeachmentItem(Resource):
 
@@ -24,7 +24,8 @@ class ImpeachmentItem(Resource):
         """
         impeachment = db.session.query(Impeachment).order_by(desc(Impeachment.register_timestamp)).first()
         impeachment_res = impeachment.serialize
-        impeachment_res['member_num'] = 0
+        member_num = impeachment_redis.get('member_num').decode('utf-8')
+        impeachment_res['member_num'] = member_num
         return jsonify({'results': impeachment_res})
 
 

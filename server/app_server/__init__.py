@@ -10,6 +10,8 @@ import eventlet
 from datetime import timedelta
 from flask import Flask
 from app_server.common.instances.web_socket import socketio
+from app_server.common.instances.redis import impeachment_redis
+from redis import Redis
 import cgitb
 
 cgitb.enable(format='text')
@@ -54,4 +56,6 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
     from app_server.controllers.comment.rest import bp_comment
     app.register_blueprint(bp_comment)
     app.register_blueprint(bp_impeachment)
+    impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
+    impeachment_redis.set('member_num', 0)
     return app
