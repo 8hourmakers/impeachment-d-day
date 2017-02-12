@@ -5,10 +5,11 @@ let id = 0;
 class Socket {
     constructor() {
         const injector = Socket.injector;
+        const host = location.host;
 
         this.id = id++;
         this.client = null;
-        this.url = 'http://127.0.0.1/global';
+        this.url = `http://${host}/global`;
         this.options = {};
         this.listeners = [];
 
@@ -41,8 +42,6 @@ class Socket {
         this.client.on('reconnect_error', (error) => {
             $rootScope.$broadcast('SOCKET_ERROR', { id, error });
         });
-
-        console.log(this.client);
 
         return this;
     }
