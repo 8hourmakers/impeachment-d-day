@@ -10,7 +10,6 @@ const extractFrameworkCss = new ExtractTextPlugin('framework.css');
 const extractStylesheet = new ExtractTextPlugin('[name].css');
 
 module.exports = {
-    devtool: 'source-map',
     entry: {
         framework: ['angular'],
         app: paths.entry.app
@@ -31,6 +30,9 @@ module.exports = {
     postcss: () => autoprefixer({ browsers: ['> 1%', 'last 3 versions', 'ie 10-11'] }),
     plugins: [
         new CleanWebpackPlugin([paths.dist]),
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['framework'],
             filename: '[name].bundle.js',

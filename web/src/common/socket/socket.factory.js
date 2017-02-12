@@ -49,7 +49,6 @@ class Socket {
         if (!this.client) throw new Error();
 
         this.client.on(listener, (message) => {
-            console.log('message', message);
             callback(message);
         });
 

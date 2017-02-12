@@ -6,6 +6,8 @@ const SenderComponent = {
     controller,
     bindings: {
         memberName: '<',
+        isDisabled: '<',
+        onSpam: '&',
         onSendChat: '&'
     }
 };

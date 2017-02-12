@@ -1,5 +1,10 @@
 <div class="Chatting">
     <span class="Chatting__number">총 인원: {{ $ctrl.memberMaxCount }}</span>
+    <div ng-show="$ctrl.isSpam" class="Chatting__spam">
+        <span>잠시 후에 다시 입력하세요 :(</span>
+    </div>
+
+    <span class="VisitCount">방문수: {{ $ctrl.visitCount }}</span>
 
     <div class="Chatting__content">
         <div scroll-manager class="Chatting__list">
@@ -11,6 +16,6 @@
 
     <div ng-switch="$ctrl.state" class="Chatting__footer">
         <member-name ng-switch-when="BeforeEntry" on-submit="$ctrl.enterChatRoom(memberName)"></member-name>
-        <sender ng-switch-when="Entrance" member-name="$ctrl.memberName"></sender>
+        <sender ng-switch-when="Entrance" is-disabled="$ctrl.isSpam" on-spam="$ctrl.showSpam()" member-name="$ctrl.memberName"></sender>
     </div>
 </div>

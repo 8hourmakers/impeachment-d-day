@@ -23,7 +23,9 @@ class SenderCtrl {
         }).then(() => {
             this.message = '';
             this.onSendChat();
-        });
+        }).catch(() => {
+            this.onSpam();
+        })
     }
 }
 

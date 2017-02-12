@@ -1,5 +1,5 @@
 <div ng-keypress="$ctrl.press($event)" class="ChattingSender">
     <span ng-bind="$ctrl.memberName"></span>
-    <input focus-manager ng-model="$ctrl.message" maxlength="150" type="text" />
+    <input focus-manager ng-disabled="$ctrl.isDisabled" ng-model="$ctrl.message" maxlength="150" type="text" />
     <button ng-click="$ctrl.sendMessage()">보내기</button>
 </div>
