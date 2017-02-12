@@ -1,5 +1,5 @@
-<div class="ChattingMemberName">
+<div ng-keypress="$ctrl.press($event)" class="ChattingMemberName">
     <span>닉네임</span>
-    <input ng-model="$ctrl.memberName" maxlength="30" type="text" />
+    <input autofocus ng-model="$ctrl.memberName" maxlength="30" type="text" />
     <button ng-click="$ctrl.submitMemberName()">채팅 입장하기</button>
 </div>

@@ -9,6 +9,13 @@ class SenderCtrl {
         this.message = '';
     }
 
+    press(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            this.sendMessage();
+        }
+    }
+
     sendMessage() {
         this.$http.post(api.comment, {
             sender_name: this.memberName,
