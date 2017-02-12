@@ -14,6 +14,7 @@ class ChattingCtrl {
 
         this.chatRoom.init().then(() => {
             this.$scope.$broadcast('SCROLL');
+            this.$scope.$broadcast('FOCUS');
         });
 
         this.socket
@@ -34,6 +35,7 @@ class ChattingCtrl {
     refresh() {
         this.chatRoom.init().then(() => {
             this.$scope.$broadcast('SCROLL');
+            this.$scope.$broadcast('FOCUS');
         });
     }
 
