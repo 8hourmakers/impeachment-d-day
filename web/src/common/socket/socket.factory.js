@@ -25,6 +25,7 @@ class Socket {
         this.client.on('connect', () => {
             console.log('connected');
             $rootScope.$broadcast('SOCKET_CONNECT', { id });
+            this.client.emit('aaa', { id });
         });
 
         this.client.on('disconnect', () => {
