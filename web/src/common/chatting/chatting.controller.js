@@ -31,6 +31,12 @@ class ChattingCtrl {
         }
     }
 
+    refresh() {
+        this.chatRoom.init().then(() => {
+            this.$scope.$broadcast('SCROLL');
+        });
+    }
+
     enterChatRoom(memberName) {
         this.state = 'Entrance';
         this.memberName = memberName;

@@ -1,4 +1,5 @@
 import reverse from 'lodash/reverse';
+import remove from 'lodash/remove';
 import api from '../../utils/api';
 
 class ChatRoom {
@@ -14,6 +15,8 @@ class ChatRoom {
     }
 
     init() {
+        remove(this.chats, () => true);
+
         return this.$http
             .get(api.comment)
             .then((res) => {
