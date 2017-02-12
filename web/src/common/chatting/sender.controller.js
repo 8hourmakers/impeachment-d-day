@@ -22,6 +22,7 @@ class SenderCtrl {
             content: this.message
         }).then(() => {
             this.message = '';
+            this.onSendChat();
         });
     }
 }
