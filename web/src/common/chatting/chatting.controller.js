@@ -1,12 +1,17 @@
 class ChattingCtrl {
-    constructor(Socket) {
+    constructor(ChatRoom, Socket) {
+        this.ChatRoom = ChatRoom;
         this.Socket = Socket;
     }
 
     $onInit() {
         this.socket = new this.Socket();
+        this.chatRoom = new this.ChatRoom();
+
         this.state = 'BeforeEntry';
         this.memberName = null;
+
+        this.chatRoom.init();
 
         this.socket
             .connect()
@@ -30,6 +35,6 @@ class ChattingCtrl {
     }
 }
 
-ChattingCtrl.$inject = ['Socket'];
+ChattingCtrl.$inject = ['ChatRoom', 'Socket'];
 
 export default ChattingCtrl;

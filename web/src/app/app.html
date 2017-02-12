@@ -1,7 +1,10 @@
 <main class="App">
+    <slider images="$ctrl.images"></slider>
+
     <article class="App__content">
-        <h1>D-{{ $ctrl.dDay.getDay() }}</h1>
-        <span>32일 4시간 30분 21초</span>
+        <span class="App__label">탄핵까지 남은 시간</span>
+        <span class="App__expect">1차 예정일 : 3월 9일</span>
+        <h2 ng-bind="$ctrl.counter"></h2>
     </article>
 
     <footer class="App__footer">

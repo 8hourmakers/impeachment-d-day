@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');
@@ -23,6 +24,7 @@ module.exports = {
                 { test: /\.js$/, loader: 'babel', include: paths.src, query: { cacheDirectory: true } },
                 { test: /\.less$/, loader: extractStylesheet.extract('style', 'css!postcss!less'), include: paths.src },
                 { test: /\.css$/, loader: extractFrameworkCss.extract('style', 'css!postcss') },
+                { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/, loader: 'file' },
                 { test: /\.html$/, loader: 'raw' }
             ]
         },
@@ -42,6 +44,10 @@ module.exports = {
             chunks: ['framework', 'app']
         }),
         extractFrameworkCss,
-        extractStylesheet
+        extractStylesheet,
+        new CopyWebpackPlugin([{
+            from: paths.assets,
+            to: './assets'
+        }])
     ]
 };

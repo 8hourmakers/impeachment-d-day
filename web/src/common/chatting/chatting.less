@@ -1,23 +1,35 @@
+@import "../../styles/openColor";
+
 .Chatting {
     display: block;
+    margin: 0 auto;
+    max-width: 768px;
     width: 100%;
     height: 100%;
+    background-color: @oc-gray-0;
+    border: 1px solid @oc-gray-3;
+    border-radius: 7px;
 
     &__content {
         display: flex;
         width: 100%;
         height: calc(~"100% - 36px");
+        border-bottom: 1px solid @oc-gray-3;
     }
 
     &__footer {
         width: 100%;
         height: 36px;
+        background-color: @oc-white;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
     }
 
     &__list {
         flex: 1;
-        padding: 0 12px;
+        padding: 6px 12px;
         overflow-y: scroll;
+        border-right: 1px solid @oc-gray-3;
     }
 
     &__members {

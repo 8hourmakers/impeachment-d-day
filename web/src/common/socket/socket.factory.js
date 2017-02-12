@@ -8,11 +8,8 @@ class Socket {
 
         this.id = id++;
         this.client = null;
-        this.url = 'http://localhost/global';
-        this.options = {
-            multiplex: true,
-            'force new connection': true
-        };
+        this.url = 'http://127.0.0.1/global';
+        this.options = {};
         this.listeners = [];
 
         this.$rootScope = injector.$rootScope;
@@ -22,7 +19,7 @@ class Socket {
         const id = this.id;
         const $rootScope = this.$rootScope;
 
-        this.client = io.connect(this.url, this.options);
+        this.client = io(this.url, this.options);
 
         this.client.on('connect', () => {
             console.log('connected');
@@ -44,6 +41,8 @@ class Socket {
         this.client.on('reconnect_error', (error) => {
             $rootScope.$broadcast('SOCKET_ERROR', { id, error });
         });
+
+        console.log(this.client);
 
         return this;
     }

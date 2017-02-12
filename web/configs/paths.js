@@ -10,5 +10,6 @@ module.exports = {
         index: resolvePath('src/views/index.html')
     },
     src: resolvePath('src'),
-    dist: resolvePath('build')
+    dist: resolvePath('build'),
+    assets: resolvePath('assets')
 };
