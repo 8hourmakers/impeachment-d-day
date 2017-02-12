@@ -20,9 +20,14 @@ $ NODE_ENV=production
 $ npm run build
 ```
 
+You can get output in ``build/`` directory.
+
+Index html location: ``build/index.html``
+
 
 ## Development
 
 ```shell
 $ npm run start
 ```
+
