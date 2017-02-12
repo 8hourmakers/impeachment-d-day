@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="com.impeachmenteightdday.impeachmenteightdday.MainActivity">
+
+	<ImageView
+		android:id="@+id/imageView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fitsSystemWindows="true"
+		android:adjustViewBounds="false"
+		android:scaleType="matrix"/>
+
+	<RelativeLayout
+		android:id="@+id/root"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<RelativeLayout
+			android:id="@+id/relativeLayout_secondScreen"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="gone"
+			>
+
+			<TextView
+				android:id="@+id/textView_dday_screenSecond"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="16dp"
+				android:paddingLeft="16dp"
+				android:paddingTop="16dp"
+				android:textColor="#fff"
+				android:textSize="16sp"/>
+
+
+			<RelativeLayout
+				android:id="@+id/relativeLayout_secondScreen_2"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_below="@+id/textView_dday_screenSecond"
+				android:visibility="gone"
+				>
+
+				<android.support.v7.widget.RecyclerView
+					android:id="@+id/recyclerView"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_above="@+id/relativeLayout_comment"
+					/>
+
+				<RelativeLayout
+					android:layout_alignParentBottom="true"
+					android:id="@+id/relativeLayout_comment"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<EditText
+						android:layout_toLeftOf="@+id/button_postComment"
+						android:id="@+id/editText_comment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_centerVertical="true"
+						android:gravity="center_vertical"
+						android:hint="댓글을 입력하세요..."
+						android:maxLines="5"
+						android:paddingLeft="16dp"
+						android:paddingRight="16dp"
+						android:textColor="#fff"
+						android:textColorHint="#fff"
+						android:textSize="14sp"/>
+
+					<Button
+						android:id="@+id/button_postComment"
+						android:layout_width="wrap_content"
+						android:layout_height="54dp"
+						android:layout_alignParentRight="true"
+						android:layout_centerVertical="true"
+						android:background="?attr/selectableItemBackground"
+						android:text="전송"
+						android:textColor="#fff"/>
+				</RelativeLayout>
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:id="@+id/relativeLayout_secondScreen_1"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_below="@+id/textView_dday_screenSecond"
+				android:visibility="visible">
+
+				<android.support.design.widget.TextInputLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginLeft="36dp"
+					android:layout_marginRight="36dp"
+					android:layout_marginTop="64dp"
+					android:textColorHint="#fff">
+
+					<android.support.v7.widget.AppCompatEditText
+						android:id="@+id/editText_nickName"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="닉네임"
+						android:imeOptions="actionDone"
+						android:inputType="text"
+						android:textColor="#fff"
+						android:textColorHint="#fff"/>
+				</android.support.design.widget.TextInputLayout>
+
+				<Button
+					android:id="@+id/button_nickNameConfirm"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentBottom="true"
+					android:layout_centerHorizontal="true"
+					android:layout_marginBottom="48dp"
+					android:background="?attr/selectableItemBackground"
+					android:text="확인"
+					android:textColor="#fff"
+					android:textSize="16sp"/>
+
+			</RelativeLayout>
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/relativeLayout_firstScreen"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			>
+
+			<TextView
+				android:id="@+id/textView_titleDday"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="120dp"
+				android:text="탄핵까지 남은 시간"
+				android:textColor="#fff"
+				android:textSize="20sp"
+				android:textStyle="bold"/>
+
+
+			<TextView
+				android:id="@+id/textView_expectTitleDday"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/textView_titleDday"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="20dp"
+				android:textColor="#fff"
+				android:textSize="16sp"
+				android:textStyle="bold"/>
+
+
+			<TextView
+				android:id="@+id/textView_dday"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/textView_expectTitleDday"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="48dp"
+				android:textColor="#fff"
+				android:textSize="24sp"
+				android:textStyle="bold"/>
+
+			<Button
+				android:id="@+id/button_startChat"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:layout_centerHorizontal="true"
+				android:layout_marginBottom="48dp"
+				android:background="?attr/selectableItemBackground"
+				android:text="채팅하러 가기 "
+				android:textColor="#fff"
+				android:textSize="16sp"/>
+
+		</RelativeLayout>
+
+	</RelativeLayout>
+</RelativeLayout>
