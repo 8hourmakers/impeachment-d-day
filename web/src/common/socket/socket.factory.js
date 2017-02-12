@@ -9,7 +9,7 @@ class Socket {
 
         this.id = id++;
         this.client = null;
-        this.url = `http://${host}/global`;
+        this.url = `http://${host}/`;
         this.options = {};
         this.listeners = [];
 

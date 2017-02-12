@@ -1,5 +1,6 @@
 class ChattingCtrl {
-    constructor(ChatRoom, Socket) {
+    constructor($scope, ChatRoom, Socket) {
+        this.$scope = $scope;
         this.ChatRoom = ChatRoom;
         this.Socket = Socket;
     }
@@ -19,7 +20,8 @@ class ChattingCtrl {
                 console.log(data);
             })
             .listen('listen/new_comment', ({ data }) => {
-                console.log(data);
+                this.chatRoom.addChat(data);
+                this.$scope.$apply();
             });
     }
 
@@ -35,6 +37,6 @@ class ChattingCtrl {
     }
 }
 
-ChattingCtrl.$inject = ['ChatRoom', 'Socket'];
+ChattingCtrl.$inject = ['$scope', 'ChatRoom', 'Socket'];
 
 export default ChattingCtrl;
