@@ -7,11 +7,11 @@ def new_comment(serialized_comment):
     comment_payload = {
         'results': serialized_comment
     }
-    socketio.emit('listen/new_comment', comment_payload, broadcast=True)
+    socketio.emit('listen/new_comment', comment_payload, broadcast=True, namespace='global')
     return
 
 
-@socketio.on('disconnect')
+@socketio.on('disconnect', namespace='/global')
 def socket_disconnect():
     impeachment_redis.decr('member_num')
     member_num = impeachment_redis.get('member_num').decode('utf-8')
@@ -20,11 +20,11 @@ def socket_disconnect():
             'member_num': member_num
         }
     }
-    socketio.emit('listen/update_member_num', member_num_payload, broadcast=True)
+    socketio.emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='global')
     print('disconnected')
 
 
-@socketio.on('connect')
+@socketio.on('connect', namespace='/global')
 def socket_connect():
     impeachment_redis.incr('member_num')
     member_num = impeachment_redis.get('member_num').decode('utf-8')
@@ -33,5 +33,5 @@ def socket_connect():
             'member_num': member_num
         }
     }
-    socketio.emit('listen/update_member_num', member_num_payload, broadcast=True)
+    socketio.emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='global')
     print('connected')
