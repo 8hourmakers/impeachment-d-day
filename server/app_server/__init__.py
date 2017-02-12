@@ -10,10 +10,9 @@ import eventlet
 from datetime import timedelta
 from flask import Flask, request
 from app_server.common.instances.redis import impeachment_redis
+from flask_socketio import emit, join_room, Namespace, leave_room, rooms
 from redis import Redis
-import cgitb
 
-cgitb.enable(format='text')
 eventlet.monkey_patch(socket=True, select=True)
 hash_mod = hashlib.sha1()
 
@@ -46,38 +45,39 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
 
     impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
     impeachment_redis.set('member_num', 0)
-
-    from flask_socketio import emit, join_room, Namespace, leave_room, rooms
-    from app_server.common.instances.web_socket import socketio
-    from app_server.common.instances.redis import impeachment_redis
-
+    impeachment_redis.set('visit_cnt', 0)
 
     @socketio.on('disconnect')
-    def socket_disconnect():
+    def test_disconnect():
         impeachment_redis.decr('member_num')
         member_num = impeachment_redis.get('member_num').decode('utf-8')
+        visit_cnt = impeachment_redis.get('visit_cnt').decode('utf-8')
         member_num_payload = {
             'results': {
-                'member_num': member_num
+                'member_num': int(member_num),
+                'visit_cnt': int(visit_cnt)
             }
         }
-        emit('listen/update_member_num', member_num_payload, broadcast=True)
-        print('disconnected')
-        print(member_num_payload)
+        emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='/chat')
 
     @socketio.on('connect')
-    def socket_connect():
-        print(request.namespace)
+    def test_connect():
+        emit('my_response', {'data': 'Connected', 'count': 0})
         impeachment_redis.incr('member_num')
+        impeachment_redis.incr('visit_cnt')
+
         member_num = impeachment_redis.get('member_num').decode('utf-8')
+        visit_cnt = impeachment_redis.get('visit_cnt').decode('utf-8')
+        join_room('auth-' + str(member_num))
         member_num_payload = {
             'results': {
-                'member_num': member_num
+                'member_num': int(member_num),
+                'visit_cnt': int(visit_cnt)
             }
         }
-        emit('listen/update_member_num', member_num_payload, broadcast=True)
-        print('connected')
-        print(member_num_payload)
+        emit('listen/update_member_num', member_num_payload, broadcast=True, namespace='/chat')
+
+    from app_server.common.instances.redis import impeachment_redis
 
     # logging module
     from app_server.common.instances.db import db

@@ -1,35 +1,51 @@
 @import "../../styles/openColor";
 
+
 .ChattingMemberName {
-    display: flex;
-    align-items: center;
     width: 100%;
     height: 100%;
-    padding: 0 12px;
+    padding: 0 8px;
+
+    &:after {
+        clear: both;
+        display: table;
+        content: "";
+    }
+
+    & > * {
+        float: left;
+    }
 
     span {
-        height: 16px;
-        line-height: 16px;
+        display: inline-block;
+        width: 40px;
+        height: 100%;
+        font-size: .88em;
+        line-height: 36px;
     }
 
     input {
-        flex: 1;
+        display: inline-block;
+        width: calc(~"100% - 172px");
         max-width: 150px;
         height: 28px;
         border: none;
         border-bottom: 1px solid @oc-gray-3;
         outline: 0;
-        margin: 0 16px;
+        margin: 4px 16px;
+        font-size: 1em;
     }
 
     button {
+        display: inline-block;
+        width: 100px;
         height: 28px;
         line-height: 28px;
         padding: 0 12px;
-        margin: 0;
+        margin: 4px 0;
         border: none;
-        background-color: @oc-green-5;
-        box-shadow: 0 -1px 0 0 @oc-green-7 inset;
+        background-color: @oc-blue-5;
+        box-shadow: 0 -1px 0 0 @oc-blue-7 inset;
         color: @oc-white;
         border-radius: 3px;
         transition: all .2s ease;
@@ -37,11 +53,11 @@
         outline: 0;
 
         &:active {
-            box-shadow: 0 0 2px 0 @oc-green-7 inset;
+            box-shadow: 0 0 2px 0 @oc-blue-7 inset;
         }
 
         &:hover {
-            box-shadow: 0 -2px 0 0 @oc-green-7 inset;
+            box-shadow: 0 -2px 0 0 @oc-blue-7 inset;
         }
     }
 }

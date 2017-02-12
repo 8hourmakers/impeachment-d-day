@@ -14,7 +14,7 @@ from sqlalchemy import or_
 from app_server.common.instances.db import db
 from app_server.common.utils.time_util import str_to_datetime
 from .ws_comment import new_comment
-
+from app_server.common.instances.redis import impeachment_redis
 
 class CommentItemList(Resource):
 
@@ -43,6 +43,10 @@ class CommentItemList(Resource):
             abort(406, "content is required")
         if sender_name is None:
             abort(406, "sender_name is required")
+        comment_expire = impeachment_redis.exists(sender_name)
+        if comment_expire is True:
+            abort(403, "Input too fast")
+        impeachment_redis.setex(sender_name, '', 1)
         comment = Comment(
             sender_name=sender_name,
             content=content

@@ -25,7 +25,9 @@ class ImpeachmentItem(Resource):
         impeachment = db.session.query(Impeachment).order_by(desc(Impeachment.register_timestamp)).first()
         impeachment_res = impeachment.serialize
         member_num = impeachment_redis.get('member_num').decode('utf-8')
-        impeachment_res['member_num'] = member_num
+        visit_cnt = impeachment_redis.get('visit_cnt').decode('utf-8')
+        impeachment_res['member_num'] = int(member_num)
+        impeachment_res['visit_cnt'] = int(visit_cnt)
         return jsonify({'results': impeachment_res})
 
 

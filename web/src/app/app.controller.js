@@ -9,9 +9,9 @@ class AppCtrl {
 
     $onInit() {
         this.images = [
-            '/impeachment_d_day/assets/1.jpeg',
-            '/impeachment_d_day/assets/2.jpeg',
-            '/impeachment_d_day/assets/3.jpeg'
+            '/assets/1.jpeg',
+            '/assets/2.jpeg',
+            '/assets/3.jpeg'
         ];
 
         this.dDay.initialize().then(() => {
