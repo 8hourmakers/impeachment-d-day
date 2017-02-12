@@ -16,9 +16,6 @@ class ChattingCtrl {
 
         this.socket
             .connect()
-            .listen('listen/update_member_num', ({ data }) => {
-                console.log(data);
-            })
             .listen('listen/new_comment', ({ data }) => {
                 this.chatRoom.addChat(data);
                 this.$scope.$apply();

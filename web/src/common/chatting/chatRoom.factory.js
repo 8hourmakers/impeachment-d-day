@@ -6,6 +6,11 @@ class ChatRoom {
         this.$http = ChatRoom.injector.$http;
 
         this.chats = [];
+        this.canLoadMore = true;
+    }
+
+    canLoad() {
+        return this.canLoadMore;
     }
 
     init() {
@@ -13,6 +18,9 @@ class ChatRoom {
             .get(api.comment)
             .then((res) => {
                 const chats = reverse(res.data.results);
+
+                this.canLoadMore = this.chats.length === 20;
+
                 chats.forEach(chat => this.chats.push(chat));
             });
     }
@@ -24,6 +32,9 @@ class ChatRoom {
             .get(api.comment, { params: { start: lastChatId } })
             .then((res) => {
                 const chats = reverse(res.data.results);
+
+                this.canLoadMore = this.chats.length === 20;
+
                 chats.forEach(chat => this.chats.unshift(chat));
             });
     }

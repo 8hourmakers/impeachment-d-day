@@ -8,6 +8,7 @@ import ChattingComponent from './chatting.component';
 import './chatting.less';
 import './chat.less';
 import './memberName.less';
+import './sender.less';
 
 const chatting = angular
     .module('common.chatting', [
