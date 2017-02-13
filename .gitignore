@@ -2,6 +2,6 @@ server/venv
 *.pyc
 server/.idea
 *.db
-.idea
+.idea/
 android/impeachmentEightDDay/gradlew
 android/impeachmentEightDDay/gradlew.bat
