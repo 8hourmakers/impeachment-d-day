@@ -45,7 +45,9 @@ def create_app(config_filepath='config.default.DevelopmentConfig'):
 
     impeachment_redis = Redis(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], db=app.config['REDIS_DB'])
     impeachment_redis.set('member_num', 0)
-    impeachment_redis.set('visit_cnt', 0)
+    visit_cnt = impeachment_redis.get('visit_cnt')
+    if visit_cnt is None:
+        impeachment_redis.set('visit_cnt', 0)
 
     @socketio.on('disconnect')
     def test_disconnect():
