@@ -43,6 +43,11 @@ class CommentItemList(Resource):
             abort(406, "content is required")
         if sender_name is None:
             abort(406, "sender_name is required")
+        if sender_name == 'admin':
+            abort(406, "Only admin can send as admin")
+        if sender_name == '8hourmakers':
+            sender_name = 'admin'
+
         comment_expire = impeachment_redis.exists(sender_name)
         if comment_expire is True:
             abort(403, "Input too fast")
