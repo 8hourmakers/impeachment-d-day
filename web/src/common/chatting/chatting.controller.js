@@ -28,10 +28,7 @@ class ChattingCtrl {
                 this.visitCount = data.visit_cnt;
             });
 
-        this.chatRoom.init().then((memberNumber, visitCount) => {
-            this.memberMaxCount = memberNumber;
-            this.visitCount = visitCount;
-
+        this.chatRoom.init().then(() => {
             this.$scope.$broadcast('SCROLL');
             this.$scope.$broadcast('FOCUS');
         });

@@ -66,9 +66,55 @@
     position: fixed;
     right: 8px;
     top: 8px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: @oc-white;
+
+    &__android {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+        background-size: cover;
+        background-position: center;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAABXklEQVR4Ae3RJYBUURiA0Z/1tAV37QF3j0ui94o7W3DXabhbRTIJSbi7Vtw5JPTt+MPntCf3flei4pfSRk3kY7NL+kQJjPLS8cjHaRyLoqlzBScjH+PBhCiSeWB85OcQrqmLIujlFQ5FIXTzAjPiC/1NtsdZD7zyykPn7DPdUK2+/HEEL3QrZrtPdYjQ0UI3ZHPfWr0jTARzo1DqXccBq72Uz3u73MN19VE4TYrVFMWwRLGWRKG0klGKjFaRn2o7lGqH6sjHCuVYEbkZ4gPgnWadddbsnWyS/3wwJLLT4LLPmr+8bZaU/Z/LGiIbK32h85e3nWWR5Z+V0TIdvUkl8EbHaIlFUPYRwcJoiXu+KO2Sv7gXSfpJU79kYLY0zU4G9knTvmTgvDSdTwYeS9PjZOC1NL2Of4+U/ZZAJVAJVAJ3peluMpCRpo3JQKMr0nJFYyRplEnhoO7KaIw/SMUn6ChVxyjgsNsAAAAASUVORK5CYII=);
+    }
+
+    & > * {
+        display: block;
+        text-align: right;
+    }
+
+    & > span {
+        margin-bottom: 4px;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 12px;
+        margin: 0;
+        border: none;
+        background-color: @oc-green-5;
+        box-shadow: 0 -1px 0 0 @oc-green-7 inset;
+        color: @oc-white;
+        border-radius: 3px;
+        transition: all .2s ease;
+        cursor: pointer;
+        outline: 0;
+        font-size: 14px;
+        text-decoration: none;
+
+        &:active {
+            box-shadow: 0 0 2px 0 @oc-green-7 inset;
+        }
+
+        &:hover {
+            box-shadow: 0 -2px 0 0 @oc-green-7 inset;
+        }
+    }
 
     @media (max-width: 600px) {
         display: none;
