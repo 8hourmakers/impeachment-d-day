@@ -25,6 +25,8 @@
             font-family: Dohyeon, sans-serif;
             font-weight: 500;
             text-align: center;
+            line-height: 1.2;
+            margin-bottom: 16px;
 
             @media (max-width: 600px) {
                 padding: 0 12px;
@@ -43,6 +45,7 @@
         font-weight: 500;
         font-family: "Nanum Brush Script", cursive;
         text-align: center;
+        line-height: 1.2;
 
         @media (max-width: 600px) {
             font-size: 44px;
@@ -62,10 +65,12 @@
 
         @media (max-width: 600px) {
             font-size: 32px;
+            margin-bottom: 20px;
         }
 
         @media (max-width: 480px) {
             font-size: 28px;
+            margin-bottom: 10px;
         }
     }
 
@@ -92,6 +97,43 @@
 
         @media screen and (max-width: 1100px) {
             display: none;
+        }
+    }
+
+    &__downloadApp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 20px;
+        margin: 0;
+        border: none;
+        background-color: @oc-green-5;
+        box-shadow: 0 -1px 0 0 @oc-green-7 inset;
+        color: @oc-white;
+        border-radius: 5px;
+        transition: all .2s ease;
+        cursor: pointer;
+        outline: 0;
+        font-size: 16px;
+        text-decoration: none;
+
+        i {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            background-size: cover;
+            background-position: center;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAABXklEQVR4Ae3RJYBUURiA0Z/1tAV37QF3j0ui94o7W3DXabhbRTIJSbi7Vtw5JPTt+MPntCf3flei4pfSRk3kY7NL+kQJjPLS8cjHaRyLoqlzBScjH+PBhCiSeWB85OcQrqmLIujlFQ5FIXTzAjPiC/1NtsdZD7zyykPn7DPdUK2+/HEEL3QrZrtPdYjQ0UI3ZHPfWr0jTARzo1DqXccBq72Uz3u73MN19VE4TYrVFMWwRLGWRKG0klGKjFaRn2o7lGqH6sjHCuVYEbkZ4gPgnWadddbsnWyS/3wwJLLT4LLPmr+8bZaU/Z/LGiIbK32h85e3nWWR5Z+V0TIdvUkl8EbHaIlFUPYRwcJoiXu+KO2Sv7gXSfpJU79kYLY0zU4G9knTvmTgvDSdTwYeS9PjZOC1NL2Of4+U/ZZAJVAJVAJ3peluMpCRpo3JQKMr0nJFYyRplEnhoO7KaIw/SMUn6ChVxyjgsNsAAAAASUVORK5CYII=);
+        }
+
+        &:active {
+            box-shadow: 0 0 2px 0 @oc-green-7 inset;
+        }
+
+        &:hover {
+            box-shadow: 0 -2px 0 0 @oc-green-7 inset;
         }
     }
 }
